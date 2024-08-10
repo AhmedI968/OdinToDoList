@@ -46,4 +46,11 @@ export default class Project {
     getTasksDueToday() {
         return this.tasks.filter(task => isToday(toDate(task.getDueDate())));
     }
+
+    // Create a function that returns the tasks due this week
+    getTasksDueThisWeek() {
+        const today = new Date();
+        const nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+        return this.tasks.filter(task => toDate(task.getDueDate()) >= today && toDate(task.getDueDate()) <= nextWeek);
+    }
 };
