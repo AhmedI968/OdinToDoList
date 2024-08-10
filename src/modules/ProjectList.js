@@ -3,7 +3,7 @@ import Project from './Project.js';
 export default class ProjectList {
     constructor() {
         this.projects = [];
-        this.projects.push(new Project('Inbox', 'This is the default project. It cannot be deleted.'));
+        this.projects.push(new Project('Inbox', 'This is the default project. It shows all the tasks.'));
         this.projects.push(new Project('Today', 'Tasks due today.'));
         this.projects.push(new Project('This Week', 'Tasks due this week.'));
     }
@@ -36,7 +36,7 @@ export default class ProjectList {
         const today = this.getProject('Today');
         const todayTasks = [];
         this.projects.forEach(project => {
-            if (project.getTitle() === 'Today' || project.getTitle() === 'This Week') return;
+            if (project.getTitle() === 'Inbox' || project.getTitle() === 'Today' || project.getTitle() === 'This Week') return;
             project.getTasksDueToday().forEach(task => {
                 todayTasks.push(task);
             });
@@ -48,11 +48,23 @@ export default class ProjectList {
         const thisWeek = this.getProject('This Week');
         const thisWeekTasks = [];
         this.projects.forEach(project => {
-            if (project.getTitle() === 'Today' || project.getTitle() === 'This Week') return;
+            if (project.getTitle() === 'Inbox' || project.getTitle() === 'Today' || project.getTitle() === 'This Week') return;
             project.getTasksDueThisWeek().forEach(task => {
                 thisWeekTasks.push(task);
             });
         });
         thisWeek.setTasks(thisWeekTasks);
     }
+
+    updateInbox() {
+        const inbox = this.getProject('Inbox');
+        const inboxTasks = [];
+        this.projects.forEach(project => {
+            if (project.getTitle() === 'Inbox' || project.getTitle() === 'Today' || project.getTitle() === 'This Week') return;
+            project.getTasks().forEach(task => {
+                inboxTasks.push(task);
+            });
+        });
+        inbox.setTasks(inboxTasks);
+    };
 };

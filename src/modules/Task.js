@@ -2,7 +2,7 @@
 
 // Task class
 export default class {
-    constructor(title, description, dueDate = 'No Date', priority, notes, checklist, project) {
+    constructor(title, description, dueDate = 'No Date', priority, notes, checklist, project='Inbox') {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
