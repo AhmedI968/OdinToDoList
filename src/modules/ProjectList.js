@@ -26,8 +26,8 @@ export default class ProjectList {
         return this.projects.find(project => project.getTitle() === title);
     }
 
-    removeProject(project) {
-        this.projects = this.projects.filter(p => p !== project);
+    removeProject(title) {
+        this.projects = this.projects.filter(p => p.getTitle() !== title);
     }
 
     // Create a function that will update today and this week projects
