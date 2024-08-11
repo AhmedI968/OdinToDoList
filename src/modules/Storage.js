@@ -17,4 +17,16 @@ export default class Storage {
         }));
         return projectList;
     }
+
+    static saveProject(project) {
+        let projectList = Storage.getAllProjects();
+        projectList.addProject(project);
+        Storage.saveAllProjects(projectList);
+    }
+
+    static removeProject(project) {
+        let projectList = Storage.getAllProjects();
+        projectList.removeProject(project);
+        Storage.saveAllProjects(projectList);
+    }
 };
