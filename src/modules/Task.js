@@ -70,9 +70,4 @@ export default class {
     setProject(project) {
         this.project = project;
     }
-
-    // Add a task to a project
-    addTaskToProject(project) {
-        project.addTask(this);
-    }
 }

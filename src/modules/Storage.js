@@ -41,4 +41,16 @@ export default class Storage {
         projectList.getProject(projectName).removeTask(task);
         Storage.saveAllProjects(projectList);
     }
+
+    static updateToday() {
+        let projectList = Storage.getAllProjects();
+        projectList.updateToday();
+        Storage.saveAllProjects(projectList);
+    }
+
+    static updateThisWeek() {
+        let projectList = Storage.getAllProjects();
+        projectList.updateThisWeek();
+        Storage.saveAllProjects(projectList);
+    }
 };
