@@ -20,6 +20,13 @@ export default class UI {
         UI.displayProjects();
     }
 
+    static removeProject(projectName) {
+        const projectList = Storage.getAllProjects();
+        projectList.removeProject(projectName);
+        Storage.saveAllProjects(projectList);
+        UI.displayProjects();
+    }
+
     static displayProjects() {
         const projectList = Storage.getAllProjects();
         const projects = projectList.getProjects();
@@ -30,6 +37,13 @@ export default class UI {
             const projectElement = document.createElement('li');
             projectElement.textContent = project.getTitle();
             projectElement.classList.add('project-element');
+            const removeButton = document.createElement('button');
+            removeButton.textContent = '-';
+            removeButton.classList.add('remove-button');
+            removeButton.addEventListener('click', () => {
+                UI.removeProject(project.getTitle());
+            });
+            projectElement.appendChild(removeButton);
             // projectElement.addEventListener('click', () => {
             //     UI.displayTasks(project.getTitle());
             // });
