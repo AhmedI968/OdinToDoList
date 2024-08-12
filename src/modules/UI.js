@@ -12,12 +12,35 @@ export default class UI {
     }
 
     static addProject() {
-        const projectList = Storage.getAllProjects();
-        const projectName = prompt('Enter the project name');
-        const projectDescription = prompt('Enter the project description');
-        projectList.addProject(new Project(projectName, projectDescription));
-        Storage.saveAllProjects(projectList);
-        UI.displayProjects();
+        const projectBar = document.getElementById('projects');
+        const projectButton = projectBar.lastChild;
+        projectBar.removeChild(projectBar.lastChild);
+        const projectContainer = document.createElement('div');
+        const projectFormHTML = `
+            <div id="projectForm">
+                <input type="text" id="projectNameInput" placeholder="Project Name" required>
+                <input type="text" id="projectDescriptionInput" placeholder="Project Description" required>
+                <button id="submitProject" class="add-button">+</button>
+            </div>
+        `;
+        projectContainer.innerHTML = projectFormHTML;
+        projectBar.appendChild(projectContainer);
+        const submitProject = document.getElementById('submitProject');
+        submitProject.addEventListener('click', () => {
+            const projectName = document.getElementById('projectNameInput').value;
+            const projectDescription = document.getElementById('projectDescriptionInput').value;
+            
+            if (projectName === '' || projectDescription === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+            const project = new Project(projectName, projectDescription);
+            Storage.saveProject(project);
+            projectBar.removeChild(projectBar.lastChild);
+            projectBar.appendChild(projectButton);
+            UI.displayProjects();
+            console.log(Storage.getAllProjects());
+        });
     }
 
     static removeProject(projectName) {
@@ -25,10 +48,10 @@ export default class UI {
         projectList.removeProject(projectName);
         Storage.saveAllProjects(projectList);
         UI.displayProjects();
+        UI.displayTasks('Inbox');
     }
 
     static takeTaskDetails() {
-        const projectList = Storage.getAllProjects();
         const main = document.getElementById('mainContent');
         const addTaskButton = main.lastChild;
         const projectName = main.firstChild.textContent;
@@ -71,8 +94,7 @@ export default class UI {
     };
 
     static displayTasks(projectName) {
-        const projectList = Storage.getAllProjects();
-        const project = projectList.getProject(projectName);
+        const project = Storage.getProject(projectName);
         const tasks = project.getTasks();
         const taskListElement = document.getElementById('mainContent');
         taskListElement.innerHTML = '';
@@ -81,22 +103,29 @@ export default class UI {
         header.classList.add('project-header');
         const taskListContainer = document.createElement('ul');
         taskListElement.appendChild(header);
-        tasks.forEach(task => {
-            const taskElement = document.createElement('li');
-            taskElement.textContent = task.getTitle();
-            taskElement.classList.add('task-element');
-            const removeButton = document.createElement('button');
-            removeButton.textContent = '-';
-            removeButton.classList.add('remove-button');
-            // removeButton.addEventListener('click', () => {
-            //     UI.removeTask(projectName, task.getTitle());
-            // });
-            // taskElement.appendChild(removeButton);
-            // taskElement.addEventListener('click', () => {
-            //     UI.displayTaskDetails(projectName, task.getTitle());
-            // });
-            taskListContainer.appendChild(taskElement);
-        });
+        if (tasks.length === 0) {
+            const noTasks = document.createElement('p');
+            noTasks.textContent = 'No tasks here.';
+            noTasks.classList.add('no-tasks');
+            taskListElement.appendChild(noTasks);
+        } else {
+            tasks.forEach(task => {
+                const taskElement = document.createElement('li');
+                taskElement.textContent = task.getTitle();
+                taskElement.classList.add('task-element');
+                const removeButton = document.createElement('button');
+                removeButton.textContent = '-';
+                removeButton.classList.add('remove-button');
+                // removeButton.addEventListener('click', () => {
+                //     UI.removeTask(projectName, task.getTitle());
+                // });
+                // taskElement.appendChild(removeButton);
+                // taskElement.addEventListener('click', () => {
+                //     UI.displayTaskDetails(projectName, task.getTitle());
+                // });
+                taskListContainer.appendChild(taskElement);
+            });
+        }
         taskListElement.appendChild(taskListContainer);
         const addTaskButton = document.createElement('button');
         addTaskButton.textContent = '+';

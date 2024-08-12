@@ -8,7 +8,7 @@ export default class Storage {
         localStorage.setItem('ProjectList', JSON.stringify(projects));
     }
 
-    static getAllProjects(projects) {
+    static getAllProjects() {
         let projectList = Object.assign(new ProjectList(), JSON.parse(localStorage.getItem('ProjectList')));
         projectList.setProjects(projectList.getProjects().map(project => {
             let newProject = Object.assign(new Project(), project);
