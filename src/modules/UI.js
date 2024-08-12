@@ -105,6 +105,7 @@ export default class UI {
             UI.takeTaskDetails();
         });
         taskListElement.appendChild(addTaskButton);
+        console.log("Here");
     };
 
     static displayProjects() {

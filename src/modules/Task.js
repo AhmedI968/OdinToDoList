@@ -7,7 +7,6 @@ export default class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.notes = notes;
         this.projectName = projectName;
     }
 
@@ -26,10 +25,6 @@ export default class Task {
 
     getPriority() {
         return this.priority;
-    }
-
-    getNotes() {
-        return this.notes;
     }
 
     getProject() {
@@ -52,10 +47,6 @@ export default class Task {
 
     setPriority(priority) {
         this.priority = priority;
-    }
-
-    setNotes(notes) {
-        this.notes = notes;
     }
 
     setprojectName(projectName) {
