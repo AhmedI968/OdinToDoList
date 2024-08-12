@@ -41,7 +41,7 @@ export default class Project {
     }
 
     removeTask(task) {
-        this.tasks = this.tasks.filter(t => t !== task);
+        this.tasks = this.tasks.filter(t => t.getTitle() !== task);
     }
 
     // Create a function that returns the tasks due today

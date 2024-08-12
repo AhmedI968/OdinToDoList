@@ -116,10 +116,10 @@ export default class UI {
                 const removeButton = document.createElement('button');
                 removeButton.textContent = '-';
                 removeButton.classList.add('remove-button');
-                // removeButton.addEventListener('click', () => {
-                //     UI.removeTask(projectName, task.getTitle());
-                // });
-                // taskElement.appendChild(removeButton);
+                removeButton.addEventListener('click', () => {
+                    UI.removeTask(projectName, task.getTitle());
+                });
+                taskElement.appendChild(removeButton);
                 // taskElement.addEventListener('click', () => {
                 //     UI.displayTaskDetails(projectName, task.getTitle());
                 // });
@@ -134,7 +134,6 @@ export default class UI {
             UI.takeTaskDetails();
         });
         taskListElement.appendChild(addTaskButton);
-        console.log("Here");
     };
 
     static displayProjects() {
