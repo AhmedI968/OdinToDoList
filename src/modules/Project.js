@@ -36,6 +36,8 @@ export default class Project {
 
     addTask(task) {
         this.tasks.push(task);
+        console.log(task);
+        console.log(this.tasks);
     }
 
     removeTask(task) {

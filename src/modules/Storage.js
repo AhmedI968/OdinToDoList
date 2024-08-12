@@ -18,6 +18,11 @@ export default class Storage {
         return projectList;
     }
 
+    static getProject(projectName) {
+        let projectList = Storage.getAllProjects();
+        return projectList.getProject(projectName);
+    };
+
     static saveProject(projectName) {
         let projectList = Storage.getAllProjects();
         projectList.addProject(projectName);
@@ -39,6 +44,12 @@ export default class Storage {
     static removeTask(projectName, task) {
         let projectList = Storage.getAllProjects();
         projectList.getProject(projectName).removeTask(task);
+        Storage.saveAllProjects(projectList);
+    }
+
+    static removeAllTasks(projectName) {
+        let projectList = Storage.getAllProjects();
+        projectList.getProject(projectName).setTasks([]);
         Storage.saveAllProjects(projectList);
     }
 

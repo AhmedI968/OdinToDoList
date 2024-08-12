@@ -2,14 +2,13 @@
 
 // Task class
 export default class Task {
-    constructor(title, description, dueDate = 'No Date', priority, notes, checklist, project='Inbox') {
+    constructor(title, description, dueDate = 'No Date', priority='', projectName='Inbox') {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
-        this.checklist = checklist;
-        this.project = project;
+        this.projectName = projectName;
     }
 
     // Getters
@@ -33,12 +32,8 @@ export default class Task {
         return this.notes;
     }
 
-    getChecklist() {
-        return this.checklist;
-    }
-
     getProject() {
-        return this.project;
+        return this.projectName;
     }
 
     // Setters
@@ -63,11 +58,7 @@ export default class Task {
         this.notes = notes;
     }
 
-    setChecklist(checklist) {
-        this.checklist = checklist;
-    }
-
-    setProject(project) {
-        this.project = project;
+    setprojectName(projectName) {
+        this.projectName = projectName;
     }
 }
