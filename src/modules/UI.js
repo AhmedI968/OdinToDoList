@@ -93,7 +93,7 @@ export default class UI {
         UI.displayTasks(projectName);
     };
 
-    static displayTaskDetails(projectName, taskTitle) {
+    static editTaskDetails(projectName, taskTitle) {
         const task = Storage.getTask(projectName, taskTitle);
         const taskDetails = document.createElement('div');
         taskDetails.innerHTML = `
@@ -154,7 +154,7 @@ export default class UI {
                 });
                 taskElement.appendChild(removeButton);
                 taskElement.addEventListener('click', () => {
-                    UI.displayTaskDetails(projectName, task.getTitle());
+                    UI.editTaskDetails(projectName, task.getTitle());
                 });
                 taskListContainer.appendChild(taskElement);
             });
