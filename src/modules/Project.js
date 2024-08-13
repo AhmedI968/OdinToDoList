@@ -40,6 +40,10 @@ export default class Project {
         console.log(this.tasks);
     }
 
+    getTask(taskTitle) {
+        return this.tasks.filter(task => task.getTitle() === taskTitle)[0];
+    }
+
     removeTask(task) {
         this.tasks = this.tasks.filter(t => t.getTitle() !== task);
     }

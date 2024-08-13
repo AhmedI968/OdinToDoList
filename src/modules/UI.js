@@ -93,6 +93,38 @@ export default class UI {
         UI.displayTasks(projectName);
     };
 
+    static displayTaskDetails(projectName, taskTitle) {
+        const task = Storage.getTask(projectName, taskTitle);
+        const taskDetails = document.createElement('div');
+        taskDetails.innerHTML = `
+            <div id="taskDetails">
+                <input type="text" id="taskTitle" value="${task.getTitle()}"></input>
+                <textarea id="taskDescription">${task.getDescription()}</textarea>
+                <input type="date" id="taskDueDate" value="${task.getDueDate()}"></input>
+                <select id="taskPriority" value="${task.getPriority()}">
+                    <option value="Low" ${task.getPriority() === 'Low' ? 'selected' : ''}>Low</option>
+                    <option value="Medium" ${task.getPriority() === 'Medium' ? 'selected' : ''}>Medium</option>
+                    <option value="High" ${task.getPriority() === 'High' ? 'selected' : ''}>High</option>
+                </select>
+                <button id="updateTaskDetails" class="update-task">Update</button>
+            </div>
+        `;
+        const main = document.getElementById('mainContent');
+        const taskElement = document.querySelector(`[data-task-id="${taskTitle}"]`);
+        main.querySelector('ul').replaceChild(taskDetails, taskElement);
+        const updateTaskDetails = document.getElementById('updateTaskDetails');
+        updateTaskDetails.addEventListener('click', () => {
+            const newTaskTitle = document.getElementById('taskTitle').value;
+            const newTaskDescription = document.getElementById('taskDescription').value;
+            const newTaskDueDate = document.getElementById('taskDueDate').value;
+            const newTaskPriority = document.getElementById('taskPriority').value;
+            const newTask = new Task(newTaskTitle, newTaskDescription, newTaskDueDate, newTaskPriority, projectName);
+            Storage.removeTask(projectName, taskTitle);
+            Storage.saveTask(projectName, newTask);
+            UI.displayTasks(projectName);
+        });
+    };
+
     static displayTasks(projectName) {
         const project = Storage.getProject(projectName);
         const tasks = project.getTasks();
@@ -113,6 +145,7 @@ export default class UI {
                 const taskElement = document.createElement('li');
                 taskElement.textContent = task.getTitle();
                 taskElement.classList.add('task-element');
+                taskElement.dataset.taskId = task.getTitle();
                 const removeButton = document.createElement('button');
                 removeButton.textContent = '-';
                 removeButton.classList.add('remove-button');
@@ -120,9 +153,9 @@ export default class UI {
                     UI.removeTask(projectName, task.getTitle());
                 });
                 taskElement.appendChild(removeButton);
-                // taskElement.addEventListener('click', () => {
-                //     UI.displayTaskDetails(projectName, task.getTitle());
-                // });
+                taskElement.addEventListener('click', () => {
+                    UI.displayTaskDetails(projectName, task.getTitle());
+                });
                 taskListContainer.appendChild(taskElement);
             });
         }

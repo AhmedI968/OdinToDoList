@@ -53,6 +53,11 @@ export default class Storage {
         Storage.saveAllProjects(projectList);
     }
 
+    static getTask(projectName, taskTitle) {
+        let projectList = Storage.getAllProjects();
+        return projectList.getProject(projectName).getTask(taskTitle);
+    }
+
     static updateToday() {
         let projectList = Storage.getAllProjects();
         projectList.updateToday();
