@@ -39,7 +39,6 @@ export default class UI {
             projectBar.removeChild(projectBar.lastChild);
             projectBar.appendChild(projectButton);
             UI.displayProjects();
-            console.log(Storage.getAllProjects());
         });
     }
 
@@ -81,7 +80,6 @@ export default class UI {
             const project = Storage.getProject(projectName);
             const newTask = new Task(taskTitle, taskDescription, taskDueDate, taskPriority, projectName)
             Storage.saveTask(projectName, newTask);
-            console.log(project.getTasks());
             main.removeChild(main.lastChild);
             main.appendChild(addTaskButton);
             UI.displayTasks(projectName);
@@ -137,7 +135,6 @@ export default class UI {
         const main = document.getElementById('mainContent');
         const taskElement = document.querySelector(`[data-task-id="${taskTitle}"]`);
         main.querySelector('ul').replaceChild(taskDetails1, taskElement);
-        console.log(main.querySelector('ul'));
         const updateTaskDetails = document.getElementById('updateTaskDetails');
         updateTaskDetails.addEventListener('click', () => {
             const newTaskTitle = document.getElementById('taskTitle').value;
@@ -190,7 +187,6 @@ export default class UI {
                 editTaskDetailsButton.addEventListener('click', (event) => {
                     event.stopPropagation()
                     UI.editTaskDetails(projectName, task.getTitle());
-                    console.log(taskListElement);
                 });
                 taskListContainer.appendChild(taskElement);
             });
