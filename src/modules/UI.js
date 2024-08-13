@@ -93,15 +93,40 @@ export default class UI {
         UI.displayTasks(projectName);
     };
 
-    static editTaskDetails(projectName, taskTitle) {
+    static viewTaskDetails(projectName, taskTitle) {
         const task = Storage.getTask(projectName, taskTitle);
-        const taskDetails = document.createElement('div');
+        let taskDetails = document.createElement('div');
         taskDetails.innerHTML = `
             <div id="taskDetails">
-                <input type="text" id="taskTitle" value="${task.getTitle()}"></input>
+                <h2>${task.getTitle()}</h2>
+                <p>${task.getDescription()}</p>
+                <p>Due: ${task.getDueDate()}</p>
+                <p>Priority: ${task.getPriority()}</p>
+            </div>
+        `;
+        const otherMain = document.getElementById('mainContent');
+        const taskElement = document.querySelector(`[data-task-id="${taskTitle}"]`);
+        const taskDetailsDiv = taskDetails.querySelector('#taskDetails');
+        taskDetailsDiv.addEventListener('click', () => {
+            UI.viewTaskDetails(projectName, taskTitle);
+        });
+        if (taskElement) {
+            otherMain.querySelector('ul').replaceChild(taskDetails, taskElement);
+            UI.taskElements[taskTitle] = taskDetails;
+        } else {
+            UI.displayTasks(projectName);
+        }
+    };
+
+    static editTaskDetails(projectName, taskTitle) {
+        const task = Storage.getTask(projectName, taskTitle);
+        let taskDetails1 = document.createElement('div');
+        taskDetails1.innerHTML = `
+            <div id="taskDetailsDiv">
+                <input type="text" id="taskTitle" value="${task.getTitle()}" />
                 <textarea id="taskDescription">${task.getDescription()}</textarea>
-                <input type="date" id="taskDueDate" value="${task.getDueDate()}"></input>
-                <select id="taskPriority" value="${task.getPriority()}">
+                <input type="date" id="taskDueDate" value="${task.getDueDate()}" />
+                <select id="taskPriority">
                     <option value="Low" ${task.getPriority() === 'Low' ? 'selected' : ''}>Low</option>
                     <option value="Medium" ${task.getPriority() === 'Medium' ? 'selected' : ''}>Medium</option>
                     <option value="High" ${task.getPriority() === 'High' ? 'selected' : ''}>High</option>
@@ -111,7 +136,8 @@ export default class UI {
         `;
         const main = document.getElementById('mainContent');
         const taskElement = document.querySelector(`[data-task-id="${taskTitle}"]`);
-        main.querySelector('ul').replaceChild(taskDetails, taskElement);
+        main.querySelector('ul').replaceChild(taskDetails1, taskElement);
+        console.log(main.querySelector('ul'));
         const updateTaskDetails = document.getElementById('updateTaskDetails');
         updateTaskDetails.addEventListener('click', () => {
             const newTaskTitle = document.getElementById('taskTitle').value;
@@ -123,6 +149,7 @@ export default class UI {
             Storage.saveTask(projectName, newTask);
             UI.displayTasks(projectName);
         });
+        
     };
 
     static displayTasks(projectName) {
@@ -152,9 +179,18 @@ export default class UI {
                 removeButton.addEventListener('click', () => {
                     UI.removeTask(projectName, task.getTitle());
                 });
+                const editTaskDetailsButton = document.createElement('button');
+                editTaskDetailsButton.textContent = 'Edit';
+                editTaskDetailsButton.classList.add('edit-button');
                 taskElement.appendChild(removeButton);
+                taskElement.appendChild(editTaskDetailsButton);
                 taskElement.addEventListener('click', () => {
+                    UI.viewTaskDetails(projectName, task.getTitle());
+                });
+                editTaskDetailsButton.addEventListener('click', (event) => {
+                    event.stopPropagation()
                     UI.editTaskDetails(projectName, task.getTitle());
+                    console.log(taskListElement);
                 });
                 taskListContainer.appendChild(taskElement);
             });
@@ -186,9 +222,6 @@ export default class UI {
                 UI.removeProject(project.getTitle());
             });
             projectElement.appendChild(removeButton);
-            // projectElement.addEventListener('click', () => {
-            //     UI.displayTasks(project.getTitle());
-            // });
             projectElement.addEventListener('click', () => {
                 UI.displayTasks(project.getTitle());
             });
