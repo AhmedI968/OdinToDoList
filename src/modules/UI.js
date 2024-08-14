@@ -9,6 +9,8 @@ export default class UI {
         UI.displayProjects();
         UI.displayTasks('Inbox');
         UI.addEventListenersButtons();
+        Storage.updateToday();
+        Storage.updateThisWeek();
     }
 
     static addEventListenersButtons() {
@@ -21,10 +23,12 @@ export default class UI {
         });
 
         todayBtn.addEventListener('click', () => {
+            Storage.updateToday();
             UI.displayTasks('Today');
         });
 
         weekBtn.addEventListener('click', () => {
+            Storage.updateThisWeek();
             UI.displayTasks('This Week');
         });
     }
