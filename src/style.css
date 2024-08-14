@@ -169,7 +169,7 @@ button {
     margin-top: 10px;
 }
 
-#taskDetails {
+#taskDetails, #taskDetailsDiv {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
@@ -182,7 +182,9 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#taskDetails input, #taskDetails textarea, #taskDetails select {
+#taskDetails input, #taskDetails textarea, #taskDetails select,
+#taskDetailsDiv input, #taskDetailsDiv textarea, #taskDetailsDiv select 
+{
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -190,12 +192,12 @@ button {
     box-sizing: border-box;
 }
 
-#taskDetails textarea {
+#taskDetails textarea, #taskDetailsDiv textarea {
     height: 100px; 
     resize: vertical;
 }
 
-#submitTaskDetails {
+#submitTaskDetails, #updateTaskDetails {
     grid-column: span 1;
     background-color: #C9ADA7;
     color: white;
@@ -207,7 +209,7 @@ button {
     transition: background-color 0.3s;
 }
 
-#submitTaskDetails:hover {
+#submitTaskDetails:hover, #updateTaskDetails:hover {
     background-color: #A67C6F;
 }
 
@@ -224,3 +226,4 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-weight: bold;
 }
+
