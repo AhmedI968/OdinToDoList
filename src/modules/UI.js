@@ -117,7 +117,7 @@ export default class UI {
         const task = Storage.getTask(projectName, taskTitle);
         let taskDetails = document.createElement('div');
         taskDetails.innerHTML = `
-            <div id="taskDetails">
+            <div id="taskDetailsView">
                 <h2>${task.getTitle()}</h2>
                 <p>${task.getDescription()}</p>
                 <p>Due: ${task.getDueDate()}</p>

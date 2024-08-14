@@ -168,3 +168,45 @@ button {
     height: 25px;
     margin-top: 10px;
 }
+
+#taskDetails {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #FAF3E0;
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#taskDetails input, #taskDetails textarea, #taskDetails select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#taskDetails textarea {
+    height: 100px; 
+    resize: vertical;
+}
+
+#submitTaskDetails {
+    grid-column: span 1;
+    background-color: #C9ADA7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#submitTaskDetails:hover {
+    background-color: #A67C6F;
+}
