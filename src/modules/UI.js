@@ -11,6 +11,8 @@ export default class UI {
         // UI.addEventListenersButtons();
     }
 
+    static addEventListenersButtons() {}
+
     static addProject() {
         const projectBar = document.getElementById('projects');
         const projectButton = projectBar.lastChild;
@@ -20,7 +22,7 @@ export default class UI {
             <div id="projectForm">
                 <input type="text" id="projectNameInput" placeholder="Project Name" required>
                 <input type="text" id="projectDescriptionInput" placeholder="Project Description" required>
-                <button id="submitProject" class="add-button">+</button>
+                <button id="submitProject" class="add-button-confirm">+</button>
             </div>
         `;
         projectContainer.innerHTML = projectFormHTML;
