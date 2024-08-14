@@ -126,7 +126,7 @@ export default class UI {
         `;
         const otherMain = document.getElementById('mainContent');
         const taskElement = document.querySelector(`[data-task-id="${taskTitle}"]`);
-        const taskDetailsDiv = taskDetails.querySelector('#taskDetails');
+        const taskDetailsDiv = taskDetails.querySelector('#taskDetailsView');
         taskDetailsDiv.addEventListener('click', () => {
             UI.viewTaskDetails(projectName, taskTitle);
         });

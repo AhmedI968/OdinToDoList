@@ -210,3 +210,17 @@ button {
 #submitTaskDetails:hover {
     background-color: #A67C6F;
 }
+
+#taskDetailsView {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #FAF3E0;
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
