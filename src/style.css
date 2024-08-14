@@ -14,6 +14,16 @@
     height: 100vh;
 }
 
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
 #headerContent {
     background-color: #00274D;
     color: white;
@@ -55,17 +65,7 @@
     max-width: 200px;
 }
 
-#sidebarContent button {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
-#sidebarContent button:hover {
+#sidebarContent .project-link:hover {
     background-color: #F9F9F9;
 }
 
@@ -80,9 +80,14 @@
     text-align: center;
     max-width: 200px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-#projects button {
+#projects .add-project {
     font-size: 2rem;
     background-color: #00FF00;
     height: 40px;
@@ -91,7 +96,7 @@
     border-radius: 50%;
 }
 
-#projects button:hover {
+#projects .add-project:hover {
     background-color: #00CC00;
 }
 
@@ -102,4 +107,39 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.project-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.project-container li {
+    list-style-type: none;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.project-container li> button {
+    height: 20px;
+    width: 20px;
+    background-color: #FF0000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.project-container li> button:hover {
+    background-color: #CC0000;
 }
