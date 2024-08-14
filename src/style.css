@@ -227,3 +227,56 @@ button {
     font-weight: bold;
 }
 
+.task-element {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px;
+    background-color: #FAF3E0;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+.task-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.remove-button,
+.edit-button {
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.remove-button {
+    background-color: #D9534F;
+    color: white;
+    border-color: #D9534F;
+}
+
+.remove-button:hover {
+    background-color: #C9302C;
+    border-color: #C9302C;
+}
+
+.edit-button {
+    background-color: #5BC0DE;
+    color: white;
+    border-color: #5BC0DE;
+}
+
+.edit-button:hover {
+    background-color: #31B0D5;
+    border-color: #31B0D5;
+}
+
+.task-element:hover {
+    background-color: #F7E8D0;
+}

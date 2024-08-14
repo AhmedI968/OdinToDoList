@@ -196,6 +196,8 @@ export default class UI {
                 taskElement.textContent = task.getTitle();
                 taskElement.classList.add('task-element');
                 taskElement.dataset.taskId = task.getTitle();
+                const buttonDiv = document.createElement('div');
+                buttonDiv.classList.add('task-buttons');
                 const removeButton = document.createElement('button');
                 removeButton.textContent = '-';
                 removeButton.classList.add('remove-button');
@@ -205,8 +207,8 @@ export default class UI {
                 const editTaskDetailsButton = document.createElement('button');
                 editTaskDetailsButton.textContent = 'Edit';
                 editTaskDetailsButton.classList.add('edit-button');
-                taskElement.appendChild(removeButton);
-                taskElement.appendChild(editTaskDetailsButton);
+                buttonDiv.appendChild(removeButton);
+                buttonDiv.appendChild(editTaskDetailsButton);
                 taskElement.addEventListener('click', () => {
                     UI.viewTaskDetails(projectName, task.getTitle());
                 });
@@ -214,6 +216,7 @@ export default class UI {
                     event.stopPropagation()
                     UI.editTaskDetails(projectName, task.getTitle());
                 });
+                taskElement.appendChild(buttonDiv);
                 taskListContainer.appendChild(taskElement);
             });
         }
