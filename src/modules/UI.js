@@ -8,10 +8,26 @@ export default class UI {
     static loadUI() {
         UI.displayProjects();
         UI.displayTasks('Inbox');
-        // UI.addEventListenersButtons();
+        UI.addEventListenersButtons();
     }
 
-    static addEventListenersButtons() {}
+    static addEventListenersButtons() {
+        const inboxBtn = document.getElementById('inbox-link');
+        const todayBtn = document.getElementById('today-link');
+        const weekBtn = document.getElementById('week-link');
+
+        inboxBtn.addEventListener('click', () => {
+            UI.displayTasks('Inbox');
+        });
+
+        todayBtn.addEventListener('click', () => {
+            UI.displayTasks('Today');
+        });
+
+        weekBtn.addEventListener('click', () => {
+            UI.displayTasks('This Week');
+        });
+    }
 
     static addProject() {
         const projectBar = document.getElementById('projects');
@@ -161,6 +177,10 @@ export default class UI {
         header.classList.add('project-header');
         const taskListContainer = document.createElement('ul');
         taskListElement.appendChild(header);
+        const description = document.createElement('h4');
+        description.textContent = project.getDescription();
+        description.classList.add('project-description-display');
+        taskListElement.appendChild(description);
         if (tasks.length === 0) {
             const noTasks = document.createElement('p');
             noTasks.textContent = 'No tasks here.';
