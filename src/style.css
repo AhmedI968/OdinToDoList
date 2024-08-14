@@ -280,3 +280,52 @@ button {
 .task-element:hover {
     background-color: #F7E8D0;
 }
+
+#mainContent {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    grid-auto-rows: min-content;
+    width: 100%;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #F9F9F9;
+}
+
+#mainContent h2 {
+    text-align: center;
+    font-size: 4rem;
+    text-decoration: underline;
+}
+
+#mainContent h4 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#mainContent .add-button {
+    background-color: #00FF00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    align-self: center;
+    width: 150px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+#mainContent .add-button:hover {
+    background-color: #00CC00;
+}
+
+#mainContent .add-button:focus {
+    outline: 2px solid #333;
+}

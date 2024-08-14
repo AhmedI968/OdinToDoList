@@ -242,7 +242,7 @@ export default class UI {
             projectElement.classList.add('project-element');
             const removeButton = document.createElement('button');
             removeButton.textContent = '-';
-            removeButton.classList.add('remove-button');
+            removeButton.classList.add('remove-button-project');
             removeButton.addEventListener('click', () => {
                 UI.removeProject(project.getTitle());
             });
